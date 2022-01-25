@@ -1,0 +1,33 @@
+<template>
+    <!-- Container for the image gallery -->
+
+    <lightning-card>
+        <div class="videoOnly">
+            <template for:each={arrayList} for:item="videoDisplay">
+                <iframe data-key={videoDisplay.youtubeURL} if:true={videoDisplay.bool} 
+                key={videoDisplay.youtubeURL} class="col-xs-4 video" width="800" height="400"
+                src={videoDisplay.youtubeURL} allowfullscreen="true" title={videoDisplay.title}>
+                </iframe>
+            </template>
+        </div>
+
+        <div class="carouselContainer">
+            
+            <div class="arrows">
+                <img src={left} onclick={minusSlides}>
+            </div>
+
+            <template class="row" for:each={customCarouselImages} for:item="videoImage">
+                <img class="carouselItems" key={videoImage} 
+                src={videoImage.youtubeThumbnail} data-thumb={videoImage.youtubeThumbnail}
+                data-boolflip={videoImage.bool} onclick={selectVideo}>
+            </template>
+
+            <div class="arrows">
+                <img src={right} onclick={plusSlides}>
+            </div>
+
+        </div>
+    </lightning-card>
+
+</template>

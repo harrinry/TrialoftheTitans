@@ -1,0 +1,21 @@
+.carouselContainer{
+    display: flex;
+    justify-content: space-around;
+}
+
+.video{
+    display: block;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.arrows{
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+/* .slds-carousel__content
+{
+    visibility:hidden;
+}  */
