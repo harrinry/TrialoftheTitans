@@ -5,23 +5,27 @@ import getVideos from '@salesforce/apex/VideoController.getVideos';
 
 export default class VideoTutorial extends LightningElement {
     
+    // carousel arrows
     right = Right_Arrow;
     left = Left_Arrow;
 
+    // hard coded numbers
     currentFirstSlotNumber = 0;
     imagesToDisplay = 3;
 
-    // @wire(getVideos) fullList;
+    // list of videos
     fullList = [];
     @track arrayList = [];
 
     @track customCarouselImages = [];
+
 
     connectedCallback()
     {
         this.init();
     }
 
+    // async to wait so that we can recieve all videos from the org
     async init()
     {
         try{
@@ -31,6 +35,7 @@ export default class VideoTutorial extends LightningElement {
             console.log(error);
         }
         finally{
+            // loop through and add org elements and add the info to a blank object to get around the read only enforced rule
             this.fullList.forEach(element => {
                 let temp = {
                     youtubeURL: element.YoutubeVideoLink__c,
@@ -40,7 +45,9 @@ export default class VideoTutorial extends LightningElement {
                 };
                 this.arrayList.push(temp);
             });
+            // set first video to true so a video can be displayed
             this.arrayList[0].bool = true;
+            // add current images to the custom carousel holder
             for(let i = 0; i < this.imagesToDisplay; ++i)
             {
                 this.customCarouselImages.push(this.arrayList[i]);
@@ -48,9 +55,12 @@ export default class VideoTutorial extends LightningElement {
         }
     }
 
+    // Run when thumbnail is selected
     selectVideo(event)
     {
         // console.table(JSON.stringify(this.arrayList));
+
+        // find current video and hide it and set new video to show
         let newElement = this.arrayList.find(ele => ele.youtubeThumbnail == event.target.dataset.thumb);
         let currentElement = this.arrayList.find(ele => ele.bool == true);
 
@@ -58,6 +68,7 @@ export default class VideoTutorial extends LightningElement {
         newElement.bool = true;
     }
 
+    //These fucntions navigate the slides by using the arrow key images
     plusSlides(event)
     {
         if(this.currentFirstSlotNumber + 1 <= this.arrayList.length)
@@ -69,7 +80,8 @@ export default class VideoTutorial extends LightningElement {
         }
         this.moveCarousel();
     }
-    
+
+    //These fucntions navigate the slides by using the arrow key images
     minusSlides(event)
     {
         if(this.currentFirstSlotNumber - 1 >= 0)
@@ -82,15 +94,20 @@ export default class VideoTutorial extends LightningElement {
         this.moveCarousel();
     }
 
+    // Hotswaps the video thumbnails with new navigation choosen
     moveCarousel()
     {
+        // loop through all Displayed images on the carousel
         for (let index = 0; index < this.imagesToDisplay; ++index) 
         {
+            // get the location numerically of the current image on the carousel
             let newLocation = this.currentFirstSlotNumber + index;
+            // if the numerical location is still within the array then just plug it in
             if(this.currentFirstSlotNumber + index < this.arrayList.length)
             {
                 this.customCarouselImages[index] = this.arrayList[newLocation];
             }
+            // if the numerical location has exceeded the total number of videos then loop it 
             else
             {
                 this.customCarouselImages[index] = this.arrayList[newLocation - this.arrayList.length];
