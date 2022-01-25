@@ -1,9 +1,10 @@
 import { LightningElement, track } from "lwc";
 
 export default class NewsModal extends LightningElement {
-  @track displayModal = true;
+  @track hasViewedNews = false;
+  @track hasViewedWelcome = true;
 
   toggleModal() {
-    this.displayModal = !this.displayModal;
+    this.hasViewedNews = true;
   }
 }
