@@ -3,8 +3,37 @@ import Left_Arrow from '@salesforce/resourceUrl/arrow_left_large';
 import Right_Arrow from '@salesforce/resourceUrl/arrow_right_large';
 import getVideos from '@salesforce/apex/VideoController.getVideos';
 
+import {getObjectInfo,getPicklistValues} from 'lightning/uiObjectInfoApi';
+import VIDEOOBJ from '@salesforce/schema/Video__c'
+
+import VIDEODIFFICULTY from '@salesforce/schema/Video__c.Difficulty__c';
+
 export default class VideoTutorial extends LightningElement {
     
+    picklistValues;
+
+    // @wire(getObjectInfo,{objectApiName:VIDEOOBJ})
+    // objectInfo({data,error}){
+    //     if(data){
+    //         console.log('data part 1: ' + JSON.stringify(data.defaultRecordTypeId));
+    //     }
+    // };
+
+    @wire (getPicklistValues,{
+        recordTypeId: '012000000000000AAA',
+        fieldApiName:VIDEODIFFICULTY
+    })orgDifficultyPicklist({data,error}){
+        if(data){
+            console.log(data.values);
+            // console.log('data part 2: ' + JSON.stringify(data));
+            this.picklistValues = data.values;
+        }
+        else if(error)
+        {
+            console.log('error present: ' + error);
+        }
+    };
+
     // carousel arrows
     right = Right_Arrow;
     left = Left_Arrow;
@@ -19,6 +48,7 @@ export default class VideoTutorial extends LightningElement {
 
     @track customCarouselImages = [];
 
+    categoryValue=[];
 
     connectedCallback()
     {
@@ -41,7 +71,8 @@ export default class VideoTutorial extends LightningElement {
                     youtubeURL: element.YoutubeVideoLink__c,
                     bool: false,
                     youtubeThumbnail: element.YoutubeThumbnailLink__c,
-                    title: element.Name
+                    title: element.Name,
+                    difficulty: element.Difficulty__c
                 };
                 this.arrayList.push(temp);
             });
@@ -53,6 +84,57 @@ export default class VideoTutorial extends LightningElement {
                 this.customCarouselImages.push(this.arrayList[i]);
             }
         }
+    }
+
+    checkboxhandler(event)
+    {
+        const {value} = event.target.dataset;
+
+        if (event.target.checked) {
+            this.categoryValue.push(value);
+        } else {
+            const index = this.categoryValue.indexOf(value);
+            if (index > -1) {
+                this.categoryValue.splice(index, 1);
+                console.log(this.categoryValue);
+            }
+        }
+        this.arrayList = [];
+        this.fullList.forEach(element => {
+            console.log(this.categoryValue.length)
+            if(this.categoryValue.length == 0)
+            {
+                let temp = {
+                    youtubeURL: element.YoutubeVideoLink__c,
+                    bool: false,
+                    youtubeThumbnail: element.YoutubeThumbnailLink__c,
+                    title: element.Name,
+                    difficulty: element.Difficulty__c
+                };
+                this.arrayList.push(temp);
+            }
+            else
+            {
+                for (let i = 0; i < this.categoryValue.length; ++i) {
+                    if(this.categoryValue[i] == element.Difficulty__c)
+                    {
+                        let temp = {
+                            youtubeURL: element.YoutubeVideoLink__c,
+                            bool: false,
+                            youtubeThumbnail: element.YoutubeThumbnailLink__c,
+                            title: element.Name,
+                            difficulty: element.Difficulty__c
+                        };
+                        this.arrayList.push(temp);
+                    }                
+                }
+            }
+        });
+        if(this.arrayList.length != 0)
+        {
+            this.arrayList[0].bool = true;
+        }
+        this.moveCarousel();
     }
 
     // Run when thumbnail is selected
