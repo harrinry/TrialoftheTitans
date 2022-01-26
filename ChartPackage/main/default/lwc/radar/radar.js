@@ -1,21 +1,20 @@
-///////////////////////////////////////////////////////////////////////////////// 
-// 
+/////////////////////////////////////////////////////////////////////////////////
+//
 // Name: Radar
 // Author: Alan Huang
 // Created: 01/25/2022
 // Updated: 01/25/2022
 // Description: Radar chart component
-// 
+//
 /////////////////////////////////////////////////////////////////////////////////
 
-import { LightningElement, api, track } from 'lwc'
-import { loadScript } from 'lightning/platformResourceLoader'
-import D3 from '@salesforce/resourceUrl/D3_v3'
-import RadarChartResource from '@salesforce/resourceUrl/RadarChart'
+import { LightningElement, api, track } from "lwc";
+import { loadScript } from "lightning/platformResourceLoader";
+import D3 from "@salesforce/resourceUrl/D3_v3";
+import RadarChartResource from "@salesforce/resourceUrl/RadarChart";
 
 export default class Radar extends LightningElement {
-
-    /** 
+    /**
      * Data to be rendered in the radar chart
      * {Array[]}    dat             Array of multiple radars
      * {Object[]}   dat[n]          An individual radar, e.g. {axis:"Battery Life",value:0.22}
@@ -24,39 +23,37 @@ export default class Radar extends LightningElement {
      */
 
     @api get dat() {
-        return this._dat
+        return this._dat;
     }
-    @track _dat
+    @track _dat;
     set dat(value) {
-        this._dat = (value ? value : [[]])
+        this._dat = value ? value : [[]];
     }
-    
+
     // The maximum width in px of the rendered chart
-    @api maxWidth = 300
+    @api maxWidth = 296;
 
     renderedCallback() {
         if (this.dat) {
             // console.log(this.dat)
             loadScript(this, `${D3}/d3.js`)
                 .then(() => {
-                    loadScript(this, `${RadarChartResource}/radarChart.js`)
-                        .then(() => {
-                            this.initializeD3()
-                        })
+                    loadScript(this, `${RadarChartResource}/radarChart.js`).then(() => {
+                        this.initializeD3();
+                    });
                 })
-                .catch(error => {
-                    console.error(error)
-                })
+                .catch((error) => {
+                    console.error(error);
+                });
         }
     }
 
     initializeD3() {
-        var margin = { top: 40, right: 40, bottom: 40, left: 40 };
+        var margin = { top: 40, right: 50, bottom: 20, left: 50 };
         var width = Math.min(this.maxWidth, window.innerWidth - 10) - margin.left - margin.right;
         var height = Math.min(width, window.innerHeight - margin.top - margin.bottom - 20);
 
-        var color = d3.scale.ordinal()
-            .range(["#EDC951", "#CC333F", "#00A0B0", "#7289ad"])
+        var color = d3.scale.ordinal().range(["#EDC951", "#CC333F", "#00A0B0", "#7289ad"]);
 
         var radarChartOptions = {
             w: width,
@@ -66,10 +63,9 @@ export default class Radar extends LightningElement {
             levels: 5,
             roundStrokes: false,
             color: color
-        }
+        };
 
         //Call function to draw the Radar chart
-        RadarChart(this.template.querySelector('div.d3'), this.dat, radarChartOptions)
+        RadarChart(this.template.querySelector("div.d3"), this.dat, radarChartOptions);
     }
-
 }

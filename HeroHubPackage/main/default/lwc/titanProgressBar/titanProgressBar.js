@@ -34,7 +34,7 @@ export default class TitanProgressBar extends LightningElement {
 
     initD3() {
         let padding = 20;
-        let height = 500;
+        let height = 50;
         let width = 700;
         let barHeight = 50;
         let roundedCorners = 5;
@@ -44,27 +44,27 @@ export default class TitanProgressBar extends LightningElement {
             segments = this.passedExams;
         }
         let exams = this.totalExams;
-        let segmentWidth = widthBar;
+        let segmentWidth = width;
         if (exams != 0) {
-            segmentWidth = widthBar / exams;
+            segmentWidth = width / exams;
         }
 
-        const svg = d3.select(this.template.querySelector("svg.progress"))
-            .attr("height", height)
+        const svg = d3
+            .select(this.template.querySelector("svg.progress"))
+            .attr("height", height + padding)
             .attr("width", width + padding)
             .attr("viewBox", [0, 0, width + padding, height + padding])
-            .attr("style", "width: 100%; height: auto; height: intrinsic;")
-			.attr("preserveAspectRatio", "xMinYMin meet");
+            .attr("style", "width: 100%; height: auto; height: intrinsic;");
+        // .attr("preserveAspectRatio", "xMinYMin meet");
 
         const states = ["1", "2", "3"];
         let currentState = this.getCurrentState(segments, exams);
 
         const colorScale = d3.scaleOrdinal().domain(states).range(["#b3697a", "#96cabe", "#69b3a2"]);
 
-        const g = svg.append("g")
-            .attr("transform", function(d, i) { 
-                return "translate(" + padding + "," + i * barHeight + ")"; 
-            })
+        const g = svg.append("g").attr("transform", function (d, i) {
+            return "translate(" + padding / 2 + "," + i * barHeight + ")";
+        });
 
         svg.append("rect")
             .attr("class", "bg-rect")
@@ -86,7 +86,7 @@ export default class TitanProgressBar extends LightningElement {
             .attr("fill", () => {
                 return colorScale(currentState);
             })
-            .attr("height", this.barHeight)
+            .attr("height", barHeight)
             .attr("width", 0)
             .attr("rx", roundedCorners)
             .attr("ry", roundedCorners)

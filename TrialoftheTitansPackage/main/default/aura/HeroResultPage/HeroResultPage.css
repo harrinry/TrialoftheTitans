@@ -7,3 +7,7 @@
 .THIS .middle-container {
     max-height: 50rem;
 }
+
+.THIS .container {
+    height: 100%;
+}
