@@ -3,8 +3,7 @@ import Left_Arrow from '@salesforce/resourceUrl/arrow_left_large';
 import Right_Arrow from '@salesforce/resourceUrl/arrow_right_large';
 import getVideos from '@salesforce/apex/VideoController.getVideos';
 
-import {getObjectInfo,getPicklistValues} from 'lightning/uiObjectInfoApi';
-import VIDEOOBJ from '@salesforce/schema/Video__c'
+import {getPicklistValues} from 'lightning/uiObjectInfoApi';
 
 import VIDEODIFFICULTY from '@salesforce/schema/Video__c.Difficulty__c';
 
