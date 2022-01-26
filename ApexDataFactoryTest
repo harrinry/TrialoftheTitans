@@ -1,0 +1,208 @@
+@isTest
+public class ApexDataFactoryTest {
+     @istest (SeeAllData=true) static void testgeneratedata(){       
+          ApexDataFactory.GenerateData();
+         
+         List<Curriculum__c> testCurriculum =[SELECT Name, Technology__c FROM Curriculum__c ORDER BY Name Asc nulls last];
+         List<String> TestCurrName=new List<String>{'Java','Salesforce'};
+             
+         for (Curriculum__c t:testCurriculum){
+             system.assertequals(true, (t.Name== t.Technology__c));
+                         
+         }
+         system.assertequals(true, testCurriculum[0].Name=='Java');
+         system.assertequals(true, testCurriculum[1].Name=='Salesforce');
+         system.assertequals(2, testCurriculum.size());
+         
+         
+         
+         List<Cohort__c> cohortlist = [SELECT Name, Curriculum__c FROM Cohort__c];
+         system.assertequals(2, cohortlist.size());
+         
+         
+        String[] names = new List<String> {'Alchemy', 'Amplifire', 'Synergy', 'Vanquish'};
+        String[] primaryColors = new List<String>{'red','yellow','blue'};
+        String[] secondaryColors = new List<String>{'orange','purple','green'};
+        List<String> slogans = new List<String>{'The true alchemists change the world into words.', 'The price of greatness is responsibility.', 'Coming together is a beginning.', 'Whatever you do, do it well'}; 
+         List<Team__c> teamlist = [SELECT Name, Slogan__c, Primary_Color__c, Secondary_Color__c FROM Team__c WHERE Name IN :names AND Primary_Color__c IN :primaryColors AND Secondary_Color__c IN :secondaryColors AND Slogan__c IN :slogans ];
+         system.assertequals(4,teamlist.size());
+         
+         List<String> squadNames = new List<String>{'Habsburg Hopefuls','Dragonsalesforce','Seven Deadly Syns','Data Warriors'};
+         List<Squad__c> squadlist = [SELECT Name, Team__c, Score__c FROM Squad__c WHERE Name IN :squadNames ];
+         system.assertequals(4,squadNames.size());
+         
+         for(Squad__c sq:squadlist){
+             system.assertequals(true, sq.Score__c !=null);
+         }
+         
+         
+         Set<String> firstNames = new Set<String>{'James', 'Mary', 'Robert', 'Patricia', 'John', 'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joeseph', 'Jessica', 'Thomas', 'Sarah', 'Charles', 'Karen', 'Christopher', 'Nancy', 'Daniel', 'Lisa', 'Matthew', 'Betty', 'Anthony', 'Margaret', 'Mark', 'Sandra', 'Donald', 'Ashley', 'Steven', 'Kimberly', 'Paul', 'Emily', 'Andrew', 'Donna', 'Seley', 'Badia', 'Joshua', 'Michelle', 'Kenneth', 'Dorothy', 'Kevin', 'Carol', 'Brian', 'Amanda', 'George', 'Melissa', 'Edward', 'Deborah', 'Ronald', 'Stephanie', 'Timothy', 'Rebecca', 'Jason', 'Sharon', 'Jeffrey', 'Laura', 'Ryan', 'Cynthia', 'Jacob', 'Kathleen', 'Gary', 'Amy', 'Nicholas', 'Shirley','Eric' , 'Angela', 'Jonathan', 'Helen', 'Mohamed', 'Sean', 'Caitlyn', 'Madeline'};
+         Set<String> lastNames = new Set<String>{'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Ali', 'Wang', 'Devi', 'Nguyen', 'Gonzalez', 'Deng', 'Ivanov', 'Silva', 'Kim', 'Mohamed', 'Wilson', 'Anderson', 'Taylor', 'Moore', 'Lee', 'White', 'Allen', 'Wright', 'Hassan', 'Freeman'};
+         List <Account> acctlist=[SELECT Name,Cohort__c, Curriculum__c, Squad__c, Team__c FROM Account WHERE Name !='Sample Account for Entitlements'];
+             
+         for (Account a:acctlist){
+             system.assertequals(true, a.Name!=null);
+             system.assertequals(true, (a.Curriculum__r.Name=='Salesforce' || a.Curriculum__r.Name=='Java'));
+             system.assertequals(true, (a.Cohort__r.Curriculum__r.Name =='Salesforce'));
+             system.assertequals(true,(a.Team__r.Name=='Alchemy' || a.Team__r.Name=='Amplifire' || a.Team__r.Name=='Synergy'|| a.Team__r.Name =='Vanquish'));
+             system.assertequals(true,(a.Squad__r.Name=='Hasburg Hopefuls'|| a.Squad__r.Name=='Seven Deadly Sins' || a.Squad__r.Name=='Dragon Salesforce' || a.Squad__r.Name=='Data Warriors'));
+             String fn=a.Name.subStringBefore(' ');
+             String ln=a.Name.substringAfter(' ');
+             String rt=a.RecordType.Name;
+             system.assertequals(true, firstNames.contains(fn));
+             system.assertequals(true,lastNames.contains(ln));
+             system.assertequals(true,rt=='Hero');            
+         }
+         system.assertequals(27,acctlist.size());
+         
+         Set<String> TitanNames= new Set<String>{
+            '01 - Declarative - Data Model',
+                '02 - Declarative - Org Configuration',
+                '03 - Declarative - Indexing',
+                '04 - Programmatic - Introduction to Apex',
+                '05 - Declarative - Security & Access',
+                '06 - Personal - Presentation Fundamentals',
+                '07 - Tools - Git & Github',
+                '08 - Declarative - Data Visualization',
+                '09 - Declarative - Chatter',
+                '10 - Declarative - Activities',
+                '11 - Tools - SDLC',
+                '12 - Programmatic - Apex Exceptions',
+                '13 - Tools - Debug Logs',
+                '14 - Tools - SFDX & Visual Studio Code',
+                '15 - Programmatic - SOQL',
+                '16 - Programmatic - SOSL',
+                '17 - Declarative - External Applications',
+                '18 - Declarative - Process Automation',
+                '19 - Declarative - Service Cloud',
+                '20 - Declarative - Sales Cloud',
+                '21 - Declarative - Data Management',
+                '22 - Programmatic - Apex Trigger Framework',
+                '23 - Programmatic - Apex Testing Framework',
+                '24 - Programmatic - HTML & CSS',
+                '25 - Programmatic - Visualforce',
+                '26 - Programmatic - Dynamic Apex',
+                '27 - Programmatic - Asynchronous Apex',
+                '28 - Programmatic - Apex Integration Services',
+                '29 - Programmatic - Apex Security & Sharing',
+                '30 - Programmatic - JavaScript',
+                '31 - Programmatic - Lightning Aura Component Framework',
+                '32 - Tools - Deployment',
+                '33 - Tools - Sandboxes',
+                '34 - Programmatic - Apex System & Schema Namespace Classes',
+                '35 - Declarative - User Setup',
+                '36 - Declarative - Auditing',
+                '37 - Platform - Order of Execution',
+                '38 - Programmatic - DML',
+                '39 - Platform - Governor Limits',
+                '40 - Programmatic - Modern Web Component Concepts',
+                '41 - Programmatic - Object-Oriented Principles in Apex',
+                '42 - Programmatic - Package Based Development',
+                '43 - Declarative - User Interface',
+                '44 - Declarative - Advanced Org Customizations',
+                '45 - Programmatic - Apex Best Practices',
+                '46 - Tools - Platform Events',
+                '47 - Programmatic - SLDS',
+                '48 - Programmatic - Lightning Web Components'
+                }; 
+                    
+        List<Titan__c> titanlist = [SELECT Name, Curriculum__c, Technology__c FROM Titan__c WHERE Name IN :TitanNames];            
+         system.assertequals(48,titanlist.size());
+         for (Titan__c tn:titanlist){
+            system.assertequals(true, (tn.Curriculum__r.Name=='Salesforce' || tn.Curriculum__r.Name=='Java')); 
+            system.assertequals(true, (tn.Technology__c==tn.Curriculum__r.Technology__c || tn.Technology__c==tn.Curriculum__r.Technology__c));
+         }  
+         
+         String[] skillTypes = new List<String>{'Coding','Soft Skills', 'Exams', 'Data Management','Design'};
+        List<Skill__c> skilllist=[SELECT Name, Assigments__c, Skill_Breakdown__c, Skill_Type__c, Titan__c FROM Skill__c WHERE Skill_Type__c IN :skillTypes];
+         system.assertequals(48,skilllist.size());
+         for(Skill__c s:skilllist){
+             TitanNames.contains(s.Titan__r.Name);
+             
+         }
+         
+         
+         List<QC_Interview__c> qcI= [SELECT Name, Account__c, Cohort__c, Finalized__c, QC_Score__c FROM QC_Interview__c];
+             
+         for(QC_Interview__c q:qcI){
+         system.assertequals(true, q.name== '%Account__r.name%');                  
+         system.assertequals(true, q.Cohort__c == q.Account__r.cohort__c);
+         system.assertequals(true, q.Finalized__c);
+         system.assertequals(true, q.Qc_Score__c!=null);
+         }
+         
+         List<String> Degrees = new List<String>{'Associates', 'Bachelors'};
+            //Degree__c - Text
+            String ImageURL = 'https://clipartmag.com/images/graduation-caps-clipart-9.jpg';
+        List<String> Majors = new List<String>{'Biology', 'Business', 'Communications', 'Computer Science', 'Criminal Justice', 'Marketing', 'Psychology', 'Information Systems', 'General Education', 'Ancient Studies', 'Liberal Arts', 'Accounting'};
+         
+        List<Education__c> ed =[SELECT DateGraduate__c, GPA__c, Degree__c, Major__c, Account__c,Name FROM Education__c WHERE Major__c IN :Majors ];
+         system.assertequals(27,ed.size());
+         for(Education__c e:ed){
+            system.assertequals(true, e.DateGraduate__c !=null);
+            system.assertequals(true, e.Gpa__c !=null);
+            system.assertequals(true, e.Degree__c !=null);
+            system.assertequals(true, e.Major__c !=null);                                                                                                                                                                                                                                                                                                                                                                   
+            system.assertequals(true, e.Account__c !=null);                                                                                  
+            system.assertequals(true, e.Name != null);                                                                                                                                                                                              
+           }
+         
+         
+         List<Exam__c> ex=[SELECT Id, Name,Default_Passing_Grade__c, Default_Time_Limit__c, Titan__c FROM Exam__c];
+        
+         
+         for (Exam__c em:ex){
+             system.assertequals(true,TitanNames.contains(em.Titan__r.Name));
+         }
+         system.assertequals(240,ex.size());
+         
+         List<Exam__c> examids=[SELECT ID FROM Exam__c];
+         List<Skill__c> skillids=[SELECT ID FROM Skill__c];
+         List<Titan__c> titanids=[SELECT ID FROM Titan__c];
+         List<String> Question_Types = new List<String>{'Multiple Choice', 'Multiple Choice - multiple answers', 'True-false', 'Matching', 'Numerical', 'Short Answer', 'Essay', 'Missing word'};
+         List<Exam_Question__c>  exq = [SELECT Name, Question_Type__c, Titan__c,Skill__c,Exam__c FROM Exam_Question__c WHERE Question_Type__c IN :Question_Types AND Titan__c IN :titanids AND Skill__c IN :skillids AND Exam__c IN :examids];
+         system.assertequals(2400,exq.size());
+         
+         List<Account> accountids=[SELECT Id FROM Account WHERE RecordType.Name= :'Hero'];
+         List<Exam_Result__c> er = [SELECT Id, Name, Exam__c, Account__c FROM Exam_Result__c WHERE Exam__c IN :examids AND Account__c IN :accountids];
+         system.assertequals(examids.size(),er.size());
+         
+         List<Exam_Result__c> erids=[SELECT Id FROM Exam_Result__c];
+         List<Exam_Question__c> eqids=[SELECT Id FROM Exam_Question__c];
+         List<Hero_Answer__c> heroans = [SELECT Id, Name, Exam_Result__c, Exam_Question__c FROM Hero_Answer__c WHERE Exam_Result__c IN :erids AND Exam_Question__c IN :eqids ];
+         system.assertequals(eqids.size(),heroans.size());           
+         
+         ApexDataFactory.deletestuff();
+         List<Exam__c> Exams = [SELECT id FROM Exam__c];
+        List<Exam_Question__c> EQs = [SELECT Id from Exam_Question__c];
+        List<Exam_Result__c> ERs = [select id from Exam_Result__c];
+        List<Hero_Answer__c> HAs = [select id from Hero_Answer__c];
+        List<Education__c> Edu = [select id from Education__c];
+        List<QC_Interview__c> QC = [select id from QC_Interview__c];
+        List<Skill__c> skill = [select id from Skill__c];
+        List<Titan__c> Titan = [select id from Titan__c];
+        List<Account> account = [select id from Account];
+        List<Squad__c> squad = [select id from Squad__c];
+        List<Team__c> team = [select id from Team__c];
+        List<Cohort__c> cohort = [select id from Cohort__c];
+        List<Curriculum__c> curr = [select id from Curriculum__c];
+         system.assertequals(true, HAs==null);
+        system.assertequals(true, ERs==null); 
+        system.assertequals(true, EQs==null);
+        system.assertequals(true, Exams==null);
+        system.assertequals(true, Edu==null);
+        system.assertequals(true, QC==null);
+        system.assertequals(true, skill==null);
+        system.assertequals(true, Titan==null);
+        system.assertequals(true, account==null);
+        system.assertequals(true, squad==null); 
+        system.assertequals(true, team==null); 
+        system.assertequals(true, cohort==null);
+        system.assertequals(true, curr==null); 
+           
+    }
+    
+    
+    
+
+}
