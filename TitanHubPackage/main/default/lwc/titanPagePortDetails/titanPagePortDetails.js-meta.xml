@@ -15,6 +15,6 @@
             label="Record Id"
             description="Automatically bind the page's record id to the component variable"
             default="{!recordId}" />
-    </targetConfig>
-</targetConfigs>
+        </targetConfig>
+    </targetConfigs>
 </LightningComponentBundle>
