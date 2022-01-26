@@ -60,7 +60,7 @@ export default class WelcomeModal extends LightningElement {
   // connectedCallback calls when the LWC is connected to the experience site and runs our getters for hasViewedNews and hasViewedWelcome
   connectedCallback(){ 
     
-
+    // Calls SubscribeMC function.
     this.subscribeMC();
 
     /* Arrow functions to call getViewedWeekly and getViewedWelcome, passing in the current user's ID. 
@@ -105,11 +105,14 @@ export default class WelcomeModal extends LightningElement {
     .catch(error => console.log(error));
   }
 
+  // Unsubscribes from the message channel when the LWC is closed or disconnected.
   disconnectedCallback(){
     unsubscribe(this.subscription);
     this.subscription = null;
   }
 
+  // Called from connected call back, subscribes the LWC to the message channel for the leaderboards.
+  // If subscription is already set, this does nothing. If it is undefined, subscribe and catch messages via handleMessage function.
   subscribeMC(){
     if(this.subscription){
       return;
@@ -119,40 +122,49 @@ export default class WelcomeModal extends LightningElement {
         NOTIFICATION,
         (message) => {
           this.handleMessage(message);
+          
         },
         {scope: APPLICATION_SCOPE}
       )
     }
   }
 
+  // Takes the message from the message channel as a parameter and compares the message against conditionals to determine which data it contains.
+  // It sorts the data based on which data is contained determined by the conditionals, and once all 3 messages have been received it concatenates the final news.
   handleMessage(message) {
-    // With LMS these are to take the message and pull the respective values into the correct variables.
-    this.squadBest = "Tester Testerson";
-    this.squadBestScore = 999;
-    this.userSquad = "Hapsburg Hopefuls";
+    if(message.teamData){
+      this.bestTeam = message.teamData[0].Team;
+      this.bestTeamWins = message.teamData[0].Weeks_Won;
 
-    this.bestSquad = "Data Warriors";
-    this.bestSquadTeam = "Vanquish";
-    this.bestSquadScore = 5037;
-    this.userSquadScore = 4360;
-    this.scoreDifference = this.bestSquadScore - this.userSquadScore;
+    } 
+    else if(message.cohortData){
+      this.bestSquad = message.cohortData[0].squad_name;
+      this.bestSquadTeam = message.cohortData[0].Name;
+      this.bestSquadScore = message.cohortData[0].Average_Score;
 
-    this.bestTeam = "Vanquish";
-    this.bestTeamWins = 34;
-    this.userTeam = "Alchemy";
-    this.userTeamWins = 25;
-    this.weeksRemaining = 1;
-    this.activeCohorts = 30;
+    } 
+    else if(message.squadData){
+      this.userTeam = message.squadData[0].Team__r.Name;
+      this.userSquad = message.squadData[0].Squad__r.Name;
+      this.squadBestScore = message.squadData[0].Weekly_Arete_Number__c;
+      this.squadBest = message.squadData[0].Name;
+    }
 
-    this.bonusQuest = "Proskero (Process Automation)";
-    this.bonusMulitplier = "doubled";
+    if(this.userTeam && this.bestSquad && this.bestTeamWins){
+      // These quest variables will need an LMS when quest is implemented. These are just static test values. 
+      this.bonusQuest = "Proskero (Process Automation)";
+      this.bonusMulitplier = "doubled";
 
+      /* Commented out sections can not be determined using current LMS data and the LMS on the leaderboards needs to be changed. 
+        The LMS sends a limit of 3 values per message, meaning at least 1 team, squad, or potential user's data is not sent making 
+        accurately calculating 'total squad score' or similar values impossible. This can be solved by tweaking the LMS and adding
+        the necessary logic here.
 
-
-    // Concatenate the variables into the news messages.
-    this.squadNews = this.squadBest + " is leading the squad, " + this.userSquad + ", for this week with a total score of " + this.squadBestScore + "ar!";
-    this.cohortNews = this.bestSquad + " squad of Team " + this.bestSquadTeam + " is leading the cohort with a combined score of " + this.bestSquadScore + "ar!" + "\n \n Your Squad, " + this.userSquad + ", is " + this.scoreDifference + "ar behind!";
-    this.leagueNews = "Team " + this.bestTeam + " leads the league with " + this.bestTeamWins + " cohort victories. \n \nYour team, " + this.userTeam + ", is " + (this.bestTeamWins-this.userTeamWins) + " behind! There are " + this.weeksRemaining + " more weeks in this league, with " + this.activeCohorts + " ongoing cohorts.";
-    this.questNews = "This week Arete gain from " + this.bonusQuest + " is " + this.bonusMulitplier;
+      */
+      this.squadNews = this.squadBest + " is leading the squad, " + this.userSquad + ", for this week with a total score of " + this.squadBestScore + "ar!";
+      this.cohortNews = this.bestSquad + " squad of Team " + this.bestSquadTeam + " is leading the cohort with a combined score of " + this.bestSquadScore + "ar!" /*+ "\n \n Your Squad, " + this.userSquad + ", is " + this.scoreDifference + "ar behind!"*/;
+      this.leagueNews = "Team " + this.bestTeam + " leads the league with " + this.bestTeamWins + " cohort victories. " /*+ "\n \nYour team, " + this.userTeam + ", is " + (this.bestTeamWins-this.userTeamWins) + " behind! There are " + this.weeksRemaining + " more weeks in this league, with " + this.activeCohorts + " ongoing cohorts."*/;
+      this.questNews = "This week Arete gain from " + this.bonusQuest + " is " + this.bonusMulitplier;
+    }
   }
 }

@@ -14,11 +14,13 @@ export default class UpdatedCohortLeaderboard extends LightningElement {
     @track columns = COLUMNS;
     @track error;
     context = createMessageContext();
+    
 
     @wire(getUpdatedCohortScore)
     wiredupdatedScore({ error, data }) {
         if (data) {
             this.cohorts = data;
+            console.log("Data Logging");
             console.log(data);
             this.cohortName = "Cohort Leaderboard for: " + this.cohorts[0].C;
             const message = {
@@ -26,11 +28,14 @@ export default class UpdatedCohortLeaderboard extends LightningElement {
             };
             this.publishMessage(message);
         } else if (error) {
+            console.log("Error Logging");
             this.error = error;
+            console.log(error);
         }
     }
 
     publishMessage(message) {
+        console.log("Message being published");
         publish(this.context, NOTIFICATION, message);
     }
 }

@@ -1,10 +1,7 @@
 {
   "trailingComma": "none",
   "printWidth": 120,
-<<<<<<< HEAD
-=======
   "tabWidth": 4,
->>>>>>> Iteration-IX-test
   "overrides": [
     {
       "files": "**/lwc/**/*.html",
