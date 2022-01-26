@@ -1,4 +1,4 @@
-public with sharing class sideBarHelper {
+public without sharing class sideBarHelper {
     
    	static PermissionSet sysAdminProfile = [SELECT Profile.Id FROM PermissionSet WHERE Profile.Name='System Administrator' AND isCustom=false];
     
@@ -27,6 +27,7 @@ public with sharing class sideBarHelper {
         Account account = getAccount();
         return [SELECT Name From Squad__C WHERE Id=:account.Squad__c];
     }
+
     @AuraEnabled(cacheable=true)
     public static List<Certification__c> getCert() {
         Contact contact = getContact();
@@ -34,12 +35,15 @@ public with sharing class sideBarHelper {
         // If running as System Admin, retrieve debug profile
         try {
             user = [SELECT Id FROM User WHERE ContactId=:contact.Id];
-        } catch (System.QueryException e) {
+        } catch (System.QueryException e) { 
             user = [SELECT Id FROM User WHERE Id=:UserInfo.getUserId()];
         }
-        List<Certification__c> certList = [SELECT Assessor__c, Date_Issued__c, Image_URL__c, User__c, Verification_Site__c,Name FROM Certification__c WHERE User__c=:user.Id];
+        List<Certification__c> certList = [SELECT Assessor__c, Date_Issued__c, Image_URL__c, User__c, Verification_Site__c,Name 
+                                           FROM Certification__c 
+                                           WHERE User__c=:user.Id];
         return certList;
     }
+
     @AuraEnabled(cacheable=true)
     public static List<Education__c> getPortfolioStatus() {
         Contact contact = getContact();

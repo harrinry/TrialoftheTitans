@@ -19,7 +19,6 @@ export default class UpdatedCohortLeaderboard extends LightningElement {
     wiredupdatedScore({ error, data }) {
         if (data) {
             this.cohorts = data;
-            console.log(data);
             this.cohortName = "Cohort Leaderboard for: " + this.cohorts[0].C;
             const message = {
                 cohortData: data
@@ -31,6 +30,7 @@ export default class UpdatedCohortLeaderboard extends LightningElement {
     }
 
     publishMessage(message) {
+        console.log(message);
         publish(this.context, NOTIFICATION, message);
     }
 }

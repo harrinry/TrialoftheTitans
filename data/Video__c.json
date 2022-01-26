@@ -27,7 +27,7 @@
                 "type": "Video__c",
                 "referenceId": "Video__cRef3"
             },
-            "Name": "Salesforce Trailhead - How to Get Started with your Salesforce Administrator Training",
+            "Name": "Get Started with your Salesforce Administrator Training",
             "YoutubeVideoLink__c": "https://www.youtube.com/embed/vc43fbyVyV4",
             "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/vc43fbyVyV4/hqdefault.jpg",
             "IsCurrentVideo__c": false,

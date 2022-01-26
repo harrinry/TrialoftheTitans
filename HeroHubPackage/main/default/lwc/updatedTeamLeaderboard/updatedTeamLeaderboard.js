@@ -18,7 +18,6 @@ export default class UpdatedTeamLeaderboard extends LightningElement {
     wiredWeeksWon({ error, data }) {
         if (data) {
             this.teams = data;
-            console.log(data);
             const message = {
                 teamData: data
             };
@@ -30,6 +29,7 @@ export default class UpdatedTeamLeaderboard extends LightningElement {
     }
 
     publishMessage(message) {
+        console.log(message);
         publish(this.context, NOTIFICATION, message);
     }
 }

@@ -7,7 +7,6 @@
 -->
 
 <aura:component controller="HeroResultPageController" implements="flexipage:availableForAllPageTypes">
-    <c:newsModal></c:newsModal>
     <c:welcomeModal></c:welcomeModal>
     <div class="slds-grid slds-wrap">
         <div class="slds-col slds-size_1-of-1 slds-m-bottom_medium">

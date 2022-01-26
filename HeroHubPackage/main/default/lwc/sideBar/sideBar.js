@@ -65,6 +65,7 @@ export default class Sidebar extends LightningElement {
             this.portStatus = "Portfolio Status : " + this.statusInfo.data[0].Portfolio_Status__c;
         }
 
+        console.log("stuff: ", this.certInfo, this.certInfo);
         if (this.certInfo.data && this.certInfo.data.length > 0) {
             this.certName = "Certification Name: " + this.certInfo.data[0].Name;
             this.certDate = "Certification Date: " + this.certInfo.data[0].Date_Issued__c;
