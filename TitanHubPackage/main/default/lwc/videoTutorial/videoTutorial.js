@@ -178,20 +178,39 @@ export default class VideoTutorial extends LightningElement {
     // Hotswaps the video thumbnails with new navigation choosen
     moveCarousel()
     {
-        // loop through all Displayed images on the carousel
-        for (let index = 0; index < this.imagesToDisplay; ++index) 
+        // time restraint caused this to be made this way
+        // Next iteration please clean this up. It should be more dynamic with images to display being able to have more then 3 images
+        // The first if and else if is what needs to be remade to work nicley like the else statement
+        if(this.arrayList.length == 1)
         {
-            // get the location numerically of the current image on the carousel
-            let newLocation = this.currentFirstSlotNumber + index;
-            // if the numerical location is still within the array then just plug it in
-            if(this.currentFirstSlotNumber + index < this.arrayList.length)
+            for (let index = 0; index < this.imagesToDisplay; ++index)
             {
-                this.customCarouselImages[index] = this.arrayList[newLocation];
+                this.customCarouselImages[index] = this.arrayList[0];
             }
-            // if the numerical location has exceeded the total number of videos then loop it 
-            else
+        }
+        else if (this.arrayList.length == 2)
+        {
+            this.customCarouselImages[0] = this.arrayList[0];
+            this.customCarouselImages[1] = this.arrayList[1];
+            this.customCarouselImages[2] = this.arrayList[0];
+        }
+        else
+        {
+            // loop through all Displayed images on the carousel
+            for (let index = 0; index < this.imagesToDisplay; ++index) 
             {
-                this.customCarouselImages[index] = this.arrayList[newLocation - this.arrayList.length];
+                // get the location numerically of the current image on the carousel
+                let newLocation = this.currentFirstSlotNumber + index;
+                // if the numerical location is still within the array then just plug it in
+                if(this.currentFirstSlotNumber + index < this.arrayList.length)
+                {
+                    this.customCarouselImages[index] = this.arrayList[newLocation];
+                }
+                // if the numerical location has exceeded the total number of videos then loop it 
+                else
+                {
+                    this.customCarouselImages[index] = this.arrayList[newLocation - this.arrayList.length];
+                }
             }
         }
     }

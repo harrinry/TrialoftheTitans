@@ -1,0 +1,92 @@
+{
+    "records": [
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef1"
+            },
+            "Name": "NEW SERIES: Trailblazer | Trailer | Watch Episodes on Salesforce+",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/j0syIsjjQBU",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/j0syIsjjQBU/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Beginner"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef2"
+            },
+            "Name": "Salesforce for Beginners (Trailhead for Newbies)",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/_3H8IhOo05w",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/_3H8IhOo05w/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Advanced"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef3"
+            },
+            "Name": "Salesforce Trailhead - How to Get Started with your Salesforce Administrator Training",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/vc43fbyVyV4",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/vc43fbyVyV4/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Advanced"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef4"
+            },
+            "Name": "Custom Carousel Using LWC | Lightning Web Components",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/heOSzIDKmAQ",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/heOSzIDKmAQ/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Beginner"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef5"
+            },
+            "Name": "What Is Salesforce? | Why Salesforce? | Salesforce Training Videos For Beginners",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/QH44R1oOvOQ",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/QH44R1oOvOQ/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Intermediate"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef6"
+            },
+            "Name": "What is Salesforce?",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/di6iwHhrH6s",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/di6iwHhrH6s/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Intermediate"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef7"
+            },
+            "Name": "How To Use Trailhead To Become A Salesforce Developer",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/YW2o6Nt5b_Y",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/YW2o6Nt5b_Y/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Beginner"
+        },
+        {
+            "attributes": {
+                "type": "Video__c",
+                "referenceId": "Video__cRef8"
+            },
+            "Name": "Start Learning Salesforce with Trailhead.com | Salesforce Learning Platform",
+            "YoutubeVideoLink__c": "https://www.youtube.com/embed/dQlXI2EsaPw",
+            "YoutubeThumbnailLink__c": "http://img.youtube.com/vi/dQlXI2EsaPw/hqdefault.jpg",
+            "IsCurrentVideo__c": false,
+            "Difficulty__c": "Intermediate"
+        }
+    ]
+}
