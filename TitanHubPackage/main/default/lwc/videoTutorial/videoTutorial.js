@@ -1,3 +1,13 @@
+///////////////////////////////////////////////////////////////////////////////// 
+// 
+// Name: VideoTutorial
+// Author: Christopher Brennan and Deep Patel
+// Created: 01/20/2022
+// Updated: 01/26/2022
+// Description: Access the video objects records and stores the information to be displayed in a custom made carousel and the youtube video
+// 
+/////////////////////////////////////////////////////////////////////////////////
+
 import { LightningElement, track, wire } from 'lwc';
 import Left_Arrow from '@salesforce/resourceUrl/arrow_left_large';
 import Right_Arrow from '@salesforce/resourceUrl/arrow_right_large';
