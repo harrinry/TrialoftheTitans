@@ -1,10 +1,14 @@
+//Name: Welcome Modal
+//Purpose: Displays modals to welcome a new user on their very first login, and to display weekly news to a user on their first login of each week (Weekly Reset Handled by Flow)
+//Created By: Matthew Lewandowski, Chris Eng, Nick de Sousa
+//Date: January 25th, 2022
 import { LightningElement, track, api, wire } from "lwc";
 import getViewedWeekly from "@salesforce/apex/modalHelper.getViewedWeekly";
 import getViewedWelcome from "@salesforce/apex/modalHelper.getViewedWelcome";
 import closeNewsModal from "@salesforce/apex/modalHelper.closeNewsModal";
 import closeWelcomeModal from "@salesforce/apex/modalHelper.closeWelcomeModal";
 import Id from "@salesforce/user/Id";
-
+//Uses LMS to subscribe to messages published for the Leaderboard Info
 import {
     subscribe,
     unsubscribe,
@@ -24,7 +28,8 @@ export default class WelcomeModal extends LightningElement {
     // Variables for displaying dynamic messages for each user. Should pull value from LMS when complete.
     @wire(MessageContext) messageContext;
     subscription = null;
-
+    
+    //Modal Message Holders
     @track squadNews;
     @track cohortNews;
     @track leagueNews;
