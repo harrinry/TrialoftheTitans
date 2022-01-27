@@ -1,5 +1,12 @@
+
+<!--
+Created by: Andy Emond
+Description: HTML for Titan Porfolio Details LWC.
+Date Created: 1/25/2022
+-->
+
 <template>
-    <div hidden >                      <!--Used for Wire Purposes.-->
+    <div hidden >                      <!--Used for Wire Purposes. Allows renderedCallback to work-->
         {skillInfo}
         {equivInfo}
         {examInfo}
@@ -9,7 +16,7 @@
         <p class="slds-p-horizontal_small">{skillName}</p>            
         <p class="slds-p-horizontal_small">{skillType}</p>
         <p class="slds-p-horizontal_small">{skillDesc}</p>
-        <!--<lightning-combobox
+        <!--<lightning-combobox                                     <!--Igonore this combobox, I used an LDS instead-->
             name="progress"
             class="slds-size_2-of-4 slds-p-horizontal_small"
             label="Personal Confortability"
