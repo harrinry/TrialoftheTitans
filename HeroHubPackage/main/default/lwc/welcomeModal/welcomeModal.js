@@ -1,6 +1,6 @@
 //Name: Welcome Modal
 //Purpose: Displays modals to welcome a new user on their very first login, and to display weekly news to a user on their first login of each week (Weekly Reset Handled by Flow)
-//Created By: Matthew Lewandowski, Chris Eng, Nick de Sousa
+//Created By: Chris Eng, Nick de Sousa, Matt Lewandowski
 //Date: January 25th, 2022
 import { LightningElement, track, api, wire } from "lwc";
 import getViewedWeekly from "@salesforce/apex/modalHelper.getViewedWeekly";
