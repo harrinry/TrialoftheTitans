@@ -1,3 +1,11 @@
+///////////////////////////////////////////////////////////////////////////////// 
+// 
+// Name: VideoTutorial
+// Author: Christopher Brennan and Deep Patel
+// Description: Receives data from DATALMS message channel
+// TODO: It needs to update into the html. 
+/////////////////////////////////////////////////////////////////////////////////
+
 import { LightningElement, wire } from "lwc";
 import notificationIcon from "@salesforce/resourceUrl/notificationBell_small";
 
@@ -10,12 +18,12 @@ export default class Notifications extends LightningElement {
 
     @wire(MessageContext)
     messageContext;
-
+    // when click on notifaiton icon it will make false or true depending on current state
     clickHandler(event) {
         event.preventDefault();
         this.showDropdown = !this.showDropdown;
     }
-
+    // subscribing from LMS
     connectedCallback() {
         subscribe(
             this.messageContext,
@@ -26,7 +34,7 @@ export default class Notifications extends LightningElement {
             { scope: APPLICATION_SCOPE }
         );
     }
-
+    // console Log data that was subscribe from DATA LMS
     handleData(message) {
         console.log(message);
     }
