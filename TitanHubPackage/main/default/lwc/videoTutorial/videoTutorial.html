@@ -1,5 +1,6 @@
 <template>
-    <!-- Container for the image gallery -->
+
+    <!-- START: Top Box holding the checkboxes and Video -->
     <lightning-card>
         <div class="flex">
             <div class="piclistValues">
@@ -12,6 +13,7 @@
                     </template>
                 </template>
             </div>
+            <!-- END: Difficulty checkboxes for filtering videos -->
             <div class="videoOnly">
                 <template for:each={arrayList} for:item="videoDisplay">
                     <div key={videoDisplay.title} if:true={videoDisplay.bool}>
@@ -24,8 +26,11 @@
 
                 </template>
             </div>
+            <!-- END: Video selected to show -->
         </div>
+    <!-- END: Top Box holding the checkboxes and Video -->
 
+        <!-- START: Custom made carousel -->
         <div class="carouselContainer">
 
             <div class="arrows">
@@ -43,6 +48,8 @@
             </div>
 
         </div>
+        <!-- END: Custom made carousel -->
+
     </lightning-card>
 
 </template>

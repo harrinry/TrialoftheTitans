@@ -4,7 +4,8 @@
 // Author: Christopher Brennan and Deep Patel
 // Created: 01/20/2022
 // Updated: 01/26/2022
-// Description: Access the video objects records and stores the information to be displayed in a custom made carousel and the youtube video
+// Description: Access the video objects records and stores the information to be displayed in a custom made carousel and the youtube video,
+//                  Child Component of Titan Summary
 // 
 /////////////////////////////////////////////////////////////////////////////////
 
@@ -21,13 +22,7 @@ export default class VideoTutorial extends LightningElement {
     
     picklistValues;
 
-    // @wire(getObjectInfo,{objectApiName:VIDEOOBJ})
-    // objectInfo({data,error}){
-    //     if(data){
-    //         console.log('data part 1: ' + JSON.stringify(data.defaultRecordTypeId));
-    //     }
-    // };
-
+    // record type Id is hardcoded from the org as the org value doesn't change between orgs. Could be made dynamic but works fine as is.
     @wire (getPicklistValues,{
         recordTypeId: '012000000000000AAA',
         fieldApiName:VIDEODIFFICULTY
@@ -47,7 +42,7 @@ export default class VideoTutorial extends LightningElement {
     right = Right_Arrow;
     left = Left_Arrow;
 
-    // hard coded numbers
+    // hard coded numbers for carousel
     currentFirstSlotNumber = 0;
     imagesToDisplay = 3;
 
@@ -57,6 +52,7 @@ export default class VideoTutorial extends LightningElement {
 
     @track customCarouselImages = [];
 
+    // list for filtering
     categoryValue=[];
 
     connectedCallback()
@@ -95,6 +91,7 @@ export default class VideoTutorial extends LightningElement {
         }
     }
 
+    // filter choices
     checkboxhandler(event)
     {
         const {value} = event.target.dataset;
@@ -108,9 +105,12 @@ export default class VideoTutorial extends LightningElement {
                 console.log(this.categoryValue);
             }
         }
+
+        // repopulates the video array so that it stores only the newly created values
         this.arrayList = [];
         this.fullList.forEach(element => {
             console.log(this.categoryValue.length)
+            // if no filter add everything
             if(this.categoryValue.length == 0)
             {
                 let temp = {
@@ -122,6 +122,7 @@ export default class VideoTutorial extends LightningElement {
                 };
                 this.arrayList.push(temp);
             }
+            // filter through selected checkboxs and compare it to video's difficulty
             else
             {
                 for (let i = 0; i < this.categoryValue.length; ++i) {
@@ -139,22 +140,23 @@ export default class VideoTutorial extends LightningElement {
                 }
             }
         });
+        // reset video displayed to work with new list
         if(this.arrayList.length != 0)
         {
             this.arrayList[0].bool = true;
         }
+        // reorganize carousel
         this.moveCarousel();
     }
 
     // Run when thumbnail is selected
     selectVideo(event)
     {
-        // console.table(JSON.stringify(this.arrayList));
-
         // find current video and hide it and set new video to show
         let newElement = this.arrayList.find(ele => ele.youtubeThumbnail == event.target.dataset.thumb);
         let currentElement = this.arrayList.find(ele => ele.bool == true);
 
+        // turn current video shown off and turn on selected video
         currentElement.bool = false;
         newElement.bool = true;
     }

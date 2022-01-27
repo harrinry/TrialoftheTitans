@@ -1,11 +1,18 @@
-public with sharing class titanPagePortDetailsHelper {
+
+/*
+Created by: Andrew Emond
+Description: Apex class for Portfolio Details LWC (titanPagePortDetails)
+Date: 1/25/2022
+*/
+
+public with sharing class titanPagePortDetailsHelper {              
    @AuraEnabled(cacheable=true)
-   public static List<Skill__c> getSkillsInfo(id titanId){
+   public static List<Skill__c> getSkillsInfo(id titanId){         //Pulls information on Skill from a titan. Just returns one at the moment.
     list<Skill__c> sList = [SELECT Assigments__c,Name,Titan__c, Skill_Breakdown__c,Skill_Type__c FROM Skill__c WHERE Titan__c=: titanId LIMIT 1];
     return sList;
    }
    @AuraEnabled(cacheable=true)
-   public static List<Equivalency__c> getEquiv(id titanId){
+   public static List<Equivalency__c> getEquiv(id titanId){        //Returns a users self inputed Equivalency on a skill.
       list<Skill__c> sList = [SELECT Assigments__c,Name,Titan__c, Skill_Breakdown__c,Skill_Type__c,Id FROM Skill__c WHERE Titan__c=: titanId LIMIT 1];
       id titanSkill = sList[0].Id;
       id userId = UserInfo.getUserId();
@@ -13,7 +20,7 @@ public with sharing class titanPagePortDetailsHelper {
       return eList;
    }
    @AuraEnabled(cacheable=true)
-   public static list<Exam_Result__c> getExamInfo(id titanId){
+   public static list<Exam_Result__c> getExamInfo(id titanId){      //Returns a users exam results (how many they have passed). For creating the automatic equivalency.
       id userId = UserInfo.getUserId();
       User conObj = [SELECT name,ContactId,Id FROM User WHERE Id=: userId LIMIT 1];
       id conId = conObj.ContactId;
@@ -32,7 +39,7 @@ public with sharing class titanPagePortDetailsHelper {
     return emptyList;
    }
    @AuraEnabled(cacheable=true)
-   public static list<Project__c> getProjectInfo(){
+   public static list<Project__c> getProjectInfo(){            //Returns a users projects. For creating the automatic equivalency.
       id userId = UserInfo.getUserId();
       list<Project__c> pList = [SELECT User__c,Name,Id From Project__c WHERE User__c =: userId];
       return pList;

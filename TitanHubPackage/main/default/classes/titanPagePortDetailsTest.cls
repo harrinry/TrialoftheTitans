@@ -11,7 +11,7 @@
 public class titanPagePortDetailsTest {
 
     @istest
-    private static void getSkillsInfoSingleTest(){
+    private static void getSkillsInfoSingleTest(){               //Single Test
          list<titan__c> tList =new list<titan__c>();
         for(integer i=0;i<1;i++){
             titan__c t= new titan__c();
@@ -38,7 +38,7 @@ public class titanPagePortDetailsTest {
         system.assertEquals(1, sSoql.size());
     }
       @istest
-    private static void getSkillsInfoBulkTest(){
+    private static void getSkillsInfoBulkTest(){                    //Bulk Test
          list<titan__c> tList =new list<titan__c>();
         for(integer i=0;i<100;i++){
             titan__c t= new titan__c();
@@ -65,7 +65,7 @@ public class titanPagePortDetailsTest {
         system.assertEquals(100, sSoql.size());
     }
     @isTest
-    private static void getEquivSingleTest(){
+    private static void getEquivSingleTest(){                         //Single Test
            list<titan__c> tList =new list<titan__c>();
         for(integer i=0;i<1;i++){
             titan__c t= new titan__c();
@@ -102,7 +102,7 @@ public class titanPagePortDetailsTest {
         system.assertEquals(1, eSoql.size());
     }
      @isTest
-    private static void getEquivBulkTest(){
+    private static void getEquivBulkTest(){                       //Bulk Test
            list<titan__c> tList =new list<titan__c>();
         for(integer i=0;i<100;i++){
             titan__c t= new titan__c();
@@ -139,7 +139,7 @@ public class titanPagePortDetailsTest {
         system.assertEquals(100, eSoql.size());
     }
     @istest
-    public static void getProjectInfoSingleTest(){
+    public static void getProjectInfoSingleTest(){                  //Single Test
         list<project__c> pList= new list<project__c>();
         for(integer i=0;i<1;i++){
             project__c p = new project__c();
@@ -153,7 +153,7 @@ public class titanPagePortDetailsTest {
         system.assertEquals(1, pSOQL.size());
     }
     @istest
-    public static void getProjectInfoBulkTest(){
+    public static void getProjectInfoBulkTest(){                    //Bulk Test
         list<project__c> pList= new list<project__c>();
         for(integer i=0;i<100;i++){
             project__c p = new project__c();
@@ -165,6 +165,6 @@ public class titanPagePortDetailsTest {
         list<project__c> pSOQL = [SELECT User__c,Name,Id From Project__c];
         titanPagePortDetailsHelper.getProjectInfo();
         system.assertEquals(100, pSOQL.size());
-    }
+    }                                                              //One method has not been tested yet.
         
 }
