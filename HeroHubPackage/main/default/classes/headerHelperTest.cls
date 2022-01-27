@@ -7,7 +7,7 @@
 */
 
 @isTest
-public class headerHelperTest {
+public class headerHelperTest {                  //single test
 	@isTest
     private static void getTeamInfoS(){
         headerHelper.getTeamInfo();
@@ -26,7 +26,7 @@ public class headerHelperTest {
         system.assertEquals(1, testList.size());
     }
     @isTest
-    private static void getTeamInfoB(){
+    private static void getTeamInfoB(){             //bulk test
         headerHelper.getTeamInfo();
         list<Team__c> tList = new list<Team__c>();
         for(integer i = 0; i<100;i++){
