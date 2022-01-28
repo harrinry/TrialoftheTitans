@@ -8,16 +8,9 @@
             "default": false,
             "dependencies": [
                 {
-                    "package": "ChartPackage@1.0.0-1"
+                    "package": "ChartPackage@1.0.0-LATEST"
                 }
             ]
-        },
-        {
-            "path": "HeroHubPackage",
-            "package": "Hero Hub Package",
-            "versionName": "ver 0.1",
-            "versionNumber": "0.1.0.NEXT",
-            "default": false
         },
         {
             "path": "ChartPackage",
@@ -31,14 +24,24 @@
             "package": "Titan Hub Package",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
-            "default": true
+            "default": true,
+            "dependencies": [
+                {
+                    "package": "TrialoftheTitansPackage@1.0.0-LATEST"
+                }
+            ]
         },
         {
             "path": "HeroHubPackage",
             "package": "Hero Hub Package",
             "versionName": "ver 0.1",
             "versionNumber": "0.1.0.NEXT",
-            "default": false
+            "default": false,
+            "dependencies": [
+                {
+                    "package": "TitanHubPackage@1.0.0-LATEST"
+                }
+            ]
         }
     ],
     "namespace": "",

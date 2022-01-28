@@ -41,13 +41,13 @@
     <!-- Main page with Aura:if for either Titan Page, Titan Slayer, or Hero Journey -->
 
     <div id="main">
-        <aura:if isTrue="{!v.navigate == v.userName}">
+        <!-- <aura:if isTrue="{!v.navigate == v.userName}">
             <c:HeroResultPage />
         </aura:if>
 
         <aura:if isTrue="{!v.navigate == 'Titans'}">
             <c:TitansPageLanding />
-        </aura:if>
+        </aura:if> -->
 
         <!-- 
         taking these out for now. mock interview package

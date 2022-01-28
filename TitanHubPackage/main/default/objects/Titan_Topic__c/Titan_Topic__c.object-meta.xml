@@ -149,18 +149,18 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <label>Certification</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Titan Topic</label>
     <nameField>
-        <displayFormat>C-{0000}</displayFormat>
-        <label>Certification Name</label>
+        <displayFormat>TT-{0000}</displayFormat>
+        <label>Titan Topic Name</label>
         <type>AutoNumber</type>
     </nameField>
-    <pluralLabel>Certifications</pluralLabel>
+    <pluralLabel>Titan Topics</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

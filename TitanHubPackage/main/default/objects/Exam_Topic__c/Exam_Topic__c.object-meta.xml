@@ -149,18 +149,17 @@
     <enableHistory>false</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>false</enableReports>
-    <enableSearch>true</enableSearch>
+    <enableSearch>false</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <externalSharingModel>Private</externalSharingModel>
-    <label>Certification</label>
+    <externalSharingModel>ControlledByParent</externalSharingModel>
+    <label>Exam Topic</label>
     <nameField>
-        <displayFormat>C-{0000}</displayFormat>
-        <label>Certification Name</label>
-        <type>AutoNumber</type>
+        <label>Exam Topic Name</label>
+        <type>Text</type>
     </nameField>
-    <pluralLabel>Certifications</pluralLabel>
+    <pluralLabel>Exam Topics</pluralLabel>
     <searchLayouts/>
-    <sharingModel>ReadWrite</sharingModel>
+    <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

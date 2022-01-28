@@ -24,7 +24,7 @@ export default class TitanPagePortDetails extends LightningElement {
 @wire(getProjectInfo) projectInfo;
 numberForApex;
 //@wire(obtainExperience, {i: '$numberForApex'})  expToApex;             //Ignore this too
-skillName;                                                              /variables I instatiated before refering to them in functions
+skillName;                                                              //variables I instatiated before refering to them in functions
 equivId;
 skillType;                             
 skillDesc;
